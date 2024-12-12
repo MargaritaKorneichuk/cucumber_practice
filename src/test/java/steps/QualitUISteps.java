@@ -2,12 +2,11 @@ package steps;
 
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.ru.И;
+import org.example.managers.DriverManager;
 import org.example.pages.FoodPage;
 import org.example.utils.Locators;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,24 +14,18 @@ import java.time.Duration;
 import java.util.List;
 
 public class QualitUISteps {
-    static private WebDriver driver;
+    static private DriverManager driverManager = DriverManager.getDriverManager();
     static private FoodPage foodPage;
     private WebDriverWait webDriverWait;
     private List<WebElement> table_rows;
     @И("инициализирован WebDriver")
     public void инициализирован_web(){
-        System.setProperty("webdriver.chromedriver.driver","src/test/resources/chrome.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        foodPage = new FoodPage(driver);
+        webDriverWait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(5));
+        foodPage = new FoodPage(driverManager.getDriver());
     }
     @И("открыта страница по адресу {string}")
     public void открыта_страница_по_адресу(String url){
-        driver.get(url);
+        driverManager.getDriver().get(url);
     }
     @ParameterType(value = "true|false")
     public Boolean booleanValue(String value) {
@@ -97,6 +90,6 @@ public class QualitUISteps {
     @И("выполнено постусловие UI")
     public static void выполнено_постусловие_ui(){
         foodPage.clickNavBarDropDown().clickResetBtn();
-        driver.quit();
+        driverManager.quitDriver();
     }
 }

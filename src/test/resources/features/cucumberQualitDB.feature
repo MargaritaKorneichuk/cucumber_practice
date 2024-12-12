@@ -6,8 +6,8 @@
 
   Предыстория:
     * инициализирован WebDriver
-    * открыта страница по адресу "http://localhost:8080/food"
-    * установлено соединение с БД по адресу "jdbc:h2:tcp://localhost:9092/mem:testdb" с параметрами "user" "pass"
+    * открыта страница по адресу "https://qualit.applineselenoid.fvds.ru/food"
+    * установлено соединение с БД по адресу "jdbc:h2:tcp://qualit.applineselenoid.fvds.ru/mem:testdb" с параметрами "user" "pass"
 
   @correct
   Структура сценария: Успешное добавление товара типа "Овощ" DB

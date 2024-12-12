@@ -6,7 +6,7 @@
 
     Предыстория:
       * инициализирован WebDriver
-      * открыта страница по адресу "http://localhost:8080/food"
+      * открыта страница по адресу "https://qualit.applineselenoid.fvds.ru/food"
 
     @correct
     Структура сценария: Успешное добавление товара типа "Овощ" UI
