@@ -50,12 +50,12 @@ public class DriverManager {
     }
     private void initRemoteDriver(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        Map<String, Object> selenoidOptions = new HashMap<>();
-        selenoidOptions.put("browserName", propManager.getProperty("type.browser"));
-        selenoidOptions.put("browserVersion", "109.0");
-        selenoidOptions.put("enableVNC", true);
-        selenoidOptions.put("enableVideo", false);
-        capabilities.setCapability("selenoid:options", selenoidOptions);
+        capabilities.setCapability("browserName", propManager.getProperty("type.browser"));
+        capabilities.setCapability("browserVersion", "109.0");
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", false
+        ));
         try {
             driver = new RemoteWebDriver(
                     URI.create(propManager.getProperty("selenoid.url")).toURL(),
